@@ -5,6 +5,9 @@ import json
 import boto3
 import time
 
+import twitter_credentials
+from helper.extract_tweet_info import extract_tweet_info
+
 
 class TweetStreamListener(StreamListener):
     # on success
@@ -19,30 +22,9 @@ class TweetStreamListener(StreamListener):
         """
         tweet = json.loads(data)
         try:
-            if 'text' in tweet.keys():
-                # Customize the message you want to send to the firehose
-                # Parse the twitter record/json
-                # Extract the columns you need
-
-                # need to take care of truncated texts longer than 140 characters. get full text
-                # full_text =
-
-                message_lst = [str(tweet['id']),
-                       str(tweet['user']['name']),
-                       str(tweet['user']['screen_name']),
-                       tweet['text'].replace('\n',' ').replace('\r',' '),
-                       str(tweet['user']['followers_count']),
-                       str(tweet['user']['location']),
-                       str(tweet['geo']),
-                       str(tweet['created_at']),
-                       '\n'
-                       ]
-
-                # message = <your code here>
-
-                message = "\t".join(message_lst)
-                # print(message)
-
+            message = extract_tweet_info(tweet)
+            # only put the record when message is not None
+            if (message):
                 firehose_client.put_record(
                     DeliveryStreamName=delivery_stream_name,
                     Record={
@@ -67,19 +49,11 @@ if __name__ == '__main__':
     # firehose_client = session.client()
 
     # Set kinesis data stream name
-    delivery_stream_name = "twitter-week2"
-
-    # Set twitter credentials
-
-    # this is your own twitter credential
-    consumer_key = 'V'
-    consumer_secret = ''
-    access_token = ''
-    access_token_secret = ''
+    delivery_stream_name = "twitter-data"
 
     # set twitter keys/tokens
-    auth = OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    auth = OAuthHandler(twitter_credentials.consumer_key, twitter_credentials.consumer_secret)
+    auth.set_access_token(twitter_credentials.access_token, twitter_credentials.access_token_secret)
 
     while True:
         try:
@@ -89,7 +63,7 @@ if __name__ == '__main__':
             myStreamlistener = TweetStreamListener()
 
             # create instance of the tweepy stream
-            stream = Stream(auth = auth, listener = myStreamlistener)
+            stream = Stream(auth=auth, listener=myStreamlistener)
 
             # search twitter for the keyword
             stream.filter(track=["#AI", "#MachineLearning"], languages=['en'], stall_warnings=True)
