@@ -1,183 +1,108 @@
-# to submit in terminal
-# spark-submit LDA_model_train.py 
-
+# This script is to test the LDA model training script quickly in local machine.
+# To submit in terminal
+# spark-submit LDA_model_train.py --py-files ../sparkLDA/dist/sparkLDA-0.1
 from pyspark.sql import SparkSession
 
-import pyspark.sql.functions as F
-from pyspark.sql.types import *
-from pyspark.ml.feature import Tokenizer, StopWordsRemover, CountVectorizer, IDF
+from pyspark.ml.feature import StopWordsRemover, CountVectorizer, IDF
 from pyspark.ml import Pipeline
 from pyspark.ml.clustering import LDA
 
 # Import stemmer library
-from nltk.stem.porter import PorterStemmer
+from os import path
 
-# create a SparkSession
-spark = SparkSession.builder.master("local").appName("twitter ML").getOrCreate()
+from sparkLDA.config import n_topics, extra_for_stemmed, seedNum
+from sparkLDA.utils import show_topics, evaluate
+from sparkLDA.processing import preprocess_text
 
-# set seed
-seedNum = 1234
+if __name__ == "__main__":
+    # create a SparkSession
+    spark = SparkSession.builder.master("local").appName("twitter ML").getOrCreate()
 
-# set parameters
-more_stopwords = ["also", "via", "cc", "rt", "must", "always"]
-n_topics = 10
+    s3_bucket = "s3://bigdata-chuangxin-week2/"
+    #
+    pipelinePath = "twitter-data-collection/ML_models/LDA-pipeline-model_test_Nov19"
+    files_path_train = "twitter-data-collection/2020_10_30_parquet"
+    files_path_test = "twitter-data-collection/2020_10_30_subsample_parquet"
 
-#
-pipelinePath = "/Users/lcx/Documents/weclouddata/my_project/spark_ML/models/LDA-pipeline-model_test"
+    # local only
+    # pipelinePath = "/Users/lcx/Documents/weclouddata/my_project/spark_ML/models/LDA-pipeline-model_test_Nov19"
+    # files_path_train = "/Users/lcx/Documents/weclouddata/my_project/twitter_data/sample_data/2020_10_30_parquet"
+    # files_path_test = "/Users/lcx/Documents/weclouddata/my_project/twitter_data/" \
+    #                   "sample_data/2020_10_30_subsample_parquet"
 
-# 
-files_path_train = "/Users/lcx/Documents/weclouddata/my_project/twitter_data/sample_data/2020_10_30/*/*"
+    #
+    # files_path_train = "/Users/lcx/Documents/weclouddata/my_project/twitter_data/sample_data/2020_10_30/*/*"
+    # files_path_test = "/Users/lcx/Documents/weclouddata/my_project/twitter_data/sample_data/2020_10_30/*/*"
+    # # 1. load file
+    # # how to prepare the train and test dataset
+    # df_train = (spark
+    #             .read
+    #             .format("csv")
+    #             .options(header=False, sep="\t", enforceSchema=True)
+    #             .schema(file_schema)
+    #             .load(files_path_train))
+    #
+    # df_test = (spark
+    #            .read
+    #            .format("csv")
+    #            .options(header=False, sep="\t", enforceSchema=True)
+    #            .schema(file_schema)
+    #            .load(files_path_test))
 
-file_schema = StructType([StructField("tweet_text", StringType(), True), 
-                          # StructField("hash_tag", ArrayType(StringType(), True), True), 
-                          StructField("hash_tag", StringType(), True), 
-                          StructField("created_at", StringType(), True), 
-                          StructField("retweet_count", IntegerType(), True), 
-                          StructField("favorite_count", IntegerType(), True), 
-                          StructField("retweeted", BooleanType(), True), 
-                          StructField("truncated", BooleanType(), True), 
-                          StructField("id", StringType(), True), 
-                          StructField("user_name", StringType(), True), 
-                          StructField("screen_name", StringType(), True), 
-                          StructField("followers_count", IntegerType(), True), 
-                          StructField("location", StringType(), True), 
-                          StructField("geo", StringType(), True),
-                          StructField("invalid", StringType(), True)])
+    # use parquet for local test
 
-# 
-def termsIdx2Term(vocabulary):
-    def termsIdx2Term(termIndices):
-        return [vocabulary[int(index)] for index in termIndices]
-    return F.udf(termsIdx2Term, ArrayType(StringType()))
+    df_train = spark.read.format("parquet").load(files_path_train)
+    df_test = spark.read.format("parquet").load(files_path_test)
 
+    # make sure the directory to save the model doesnot exist
+    # if path.exists(pipelinePath):
+    #     print(f"directory to save pipeline model already exists: {pipelinePath}")
+    #     raise Exception()
+    print("model will be save in \n", s3_bucket + pipelinePath)
+    # ============================================
+    # preprocessing
+    # ============================================
 
-# 1. load file
-# how to prepare the train and test dataset
-df = (spark
-    .read
-  .format("csv")
-  .options(header=False, sep="\t", enforceSchema=True)
-  .schema(file_schema)
-  .load(files_path_train))
+    df_train = preprocess_text(df_train)
+    df_test = preprocess_text(df_test)
 
-# df_test = (spark
-#     .read
-#   .format("csv")
-#   .options(header=False, sep="\t", enforceSchema=True)
-#   .schema(file_schema)
-#   .load(files_path_train))
+    df_train.cache()
+    df_test.cache()
+    print("Train/test data info:")
+    print(50*"=")
+    print("Load training data from: ")
+    print(files_path_train)
+    print("Load test data from: ")
+    print(files_path_test)
+    print(f"nums of training data: {df_train.count(): 10d}")
+    print(f"nums of test data: {df_test.count(): 10d}")
+    print(50*"=")
+    # ============================================
+    # build the pipeline
+    # ============================================
 
-# columns of interest
-cols_select = ['tweet_text', 'hash_tag', 'created_at', 'retweet_count', 'favorite_count']
+    # one extra step to remove the frequent words
+    stopword_remover_stem = StopWordsRemover(inputCol="stemmed", outputCol="stemmed_rm")
+    stopword_remover_stem.setStopWords(extra_for_stemmed)
 
-df_select = df.dropna(subset=["tweet_text"]).select(cols_select)
+    df_train = stopword_remover_stem.transform(df_train)
+    df_test = stopword_remover_stem.transform(df_test)
+    # 2.4. CountVectorizer
+    vectorizer = CountVectorizer(inputCol= "stemmed_rm", outputCol="rawFeatures")
+    # 2.5. IDf
+    idf = IDF(inputCol="rawFeatures", outputCol="features")
 
-# 2. text processing
+    # 3. train the LDA model
+    lda = LDA(k=n_topics, seed=seedNum, optimizer="em", maxIter=5)
 
-# training data
-df_select_clean = (df_select.withColumn("tweet_text", F.regexp_replace("tweet_text", r"[@#&][A-Za-z0-9_-]+", " "))
-                   .withColumn("tweet_text", F.regexp_replace("tweet_text", r"\w+:\/\/\S+", " "))
-                   .withColumn("tweet_text", F.regexp_replace("tweet_text", r"[^A-Za-z]", " "))
-                   .withColumn("tweet_text", F.regexp_replace("tweet_text", r"\s+", " "))
-                   .withColumn("tweet_text", F.lower(F.col("tweet_text")))
-                   .withColumn("tweet_text", F.trim(F.col("tweet_text")))
-                  )
+    pipeline = Pipeline(stages=[vectorizer, idf, lda])
 
+    pipeline_model = pipeline.fit(df_train)
+    pipeline_model.write().overwrite().save(pipelinePath)
 
-df_select_clean.cache()
-print("total tweets: ", df_select_clean.count())
+    show_topics(pipeline_model)
 
-# # test data
-# df_select_clean = (df_select.withColumn("tweet_text", F.regexp_replace("tweet_text", r"[@#&][A-Za-z0-9_-]+", " "))
-#                    .withColumn("tweet_text", F.regexp_replace("tweet_text", r"\w+:\/\/\S+", " "))
-#                    .withColumn("tweet_text", F.regexp_replace("tweet_text", r"[^A-Za-z]", " "))
-#                    .withColumn("tweet_text", F.regexp_replace("tweet_text", r"\s+", " "))
-#                    .withColumn("tweet_text", F.lower(F.col("tweet_text")))
-#                    .withColumn("tweet_text", F.trim(F.col("tweet_text")))
-#                   )
-
-#============================================
-# preprocessing
-#============================================
-# 2.1. tokenize
-tokenizer = Tokenizer(inputCol="tweet_text", outputCol="tokens")
-
-# 2.2. remove stopwords
-stopword_remover = StopWordsRemover(inputCol="tokens", outputCol="remove_stop")
-
-stopwords_list = stopword_remover.getStopWords()
-stopwords_list = stopwords_list + more_stopwords
-stopword_remover.setStopWords(stopwords_list)
-#2.3. stemming
-# TODO: how to modify the stemming function into a transformer?
-stemmer = PorterStemmer()
-# more straightforward to use lambda
-stem_udf = F.udf(lambda l : [stemmer.stem(word) for word in l], returnType = ArrayType(StringType()))
-
-
-df_tokenized = tokenizer.transform(df_select_clean)
-df_rmstop = stopword_remover.transform(df_tokenized)
-df_stemmed = df_rmstop.withColumn("stemmed", stem_udf(F.col("remove_stop")))
-
-df_stemmed.cache()
-df_select_clean.unpersist()
-df_train = df_stemmed
-
-
-#============================================
-# build the pipeline
-#============================================
-
-# 2.4. CountVectorizer
-vectorizer = CountVectorizer(inputCol= "stemmed", outputCol="rawFeatures")
-# 2.5. IDf
-idf = IDF(inputCol="rawFeatures", outputCol="features")
-
-
-
-# 3. train the LDA model
-lda = LDA(k=10, seed=seedNum, optimizer="em")
-
-pipeline = Pipeline(stages=[vectorizer, idf, lda])
-
-
-pipeline_model = pipeline.fit(df_train)
-
-pipeline_model.write().overwrite().save(pipelinePath)
-
-
-# get the LDA model and other useful part
-lda_model = pipeline_model.stages[-1]
-
-
-vectorizer_model = pipeline_model.stages[0]
-vocabList = vectorizer_model.vocabulary
-
-idf_model = pipeline_model.stages[1]
-
-# show the topics and the associated words
-topics_describe = lda_model.describeTopics()
-
-final = topics_describe.withColumn("Terms", termsIdx2Term(vocabList)("termIndices"))
-
-final.select("Terms").show(truncate=False)
-
-# 4. evaluate
-logll_train = lda_model.trainingLogLikelihood()
-logppl_train = lda_model.logPerplexity(idf_model.transform(vectorizer_model.transform(df_train)))
-print("Model performance on training data:")
-print(f"Log Likelihood: {logll_train: .4f}")
-print(f"Log Perplexity: {logppl_train: .4f}")
-
-# logppl_test = lda_model.logPerplexity(idf_model.transform(vectorizer_model.transform(df_test)))
-# logll_test = lda_model.logLikelihood(idf_model.transform(vectorizer_model.transform(df_test)))
-# print("\n")
-# print("Model performance on test data:")
-# print(f"LogLikelihood: {logll_test: .4f}")
-# print(f"Log Perplexity: {logppl_test: .4f}")
-
-
-
-
-
-
+    print("Model performance on training data:")
+    evaluate(pipeline_model, df_train, isTrain=True)
+    print("Model performance on test data:")
+    evaluate(pipeline_model, df_test, isTrain=False)

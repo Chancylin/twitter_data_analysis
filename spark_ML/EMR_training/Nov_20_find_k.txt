@@ -1,0 +1,168 @@
+20/11/21 04:14:37 INFO SparkContext: Running Spark version 2.4.6-amzn-0
+20/11/21 04:14:37 INFO SparkContext: Submitted application: twitter LDA
+20/11/21 04:14:37 INFO SecurityManager: Changing view acls to: hadoop
+20/11/21 04:14:37 INFO SecurityManager: Changing modify acls to: hadoop
+20/11/21 04:14:37 INFO SecurityManager: Changing view acls groups to: 
+20/11/21 04:14:37 INFO SecurityManager: Changing modify acls groups to: 
+20/11/21 04:14:37 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(hadoop); groups with view permissions: Set(); users  with modify permissions: Set(hadoop); groups with modify permissions: Set()
+20/11/21 04:14:38 INFO Utils: Successfully started service 'sparkDriver' on port 42723.
+20/11/21 04:14:38 INFO SparkEnv: Registering MapOutputTracker
+20/11/21 04:14:38 INFO SparkEnv: Registering BlockManagerMaster
+20/11/21 04:14:38 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+20/11/21 04:14:38 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+20/11/21 04:14:38 INFO DiskBlockManager: Created local directory at /mnt/tmp/blockmgr-f9ea0f98-9174-457a-bcc9-176d181fd76d
+20/11/21 04:14:38 INFO MemoryStore: MemoryStore started with capacity 1028.8 MB
+20/11/21 04:14:38 INFO SparkEnv: Registering OutputCommitCoordinator
+20/11/21 04:14:38 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+20/11/21 04:14:38 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://ip-172-31-11-81.ec2.internal:4040
+20/11/21 04:14:38 INFO Utils: Using initial executors = 1, max of spark.dynamicAllocation.initialExecutors, spark.dynamicAllocation.minExecutors and spark.executor.instances
+20/11/21 04:14:39 INFO RMProxy: Connecting to ResourceManager at ip-172-31-11-81.ec2.internal/172.31.11.81:8032
+20/11/21 04:14:39 INFO Client: Requesting a new application from cluster with 1 NodeManagers
+20/11/21 04:14:39 INFO Configuration: resource-types.xml not found
+20/11/21 04:14:39 INFO ResourceUtils: Unable to find 'resource-types.xml'.
+20/11/21 04:14:39 INFO ResourceUtils: Adding resource type - name = memory-mb, units = Mi, type = COUNTABLE
+20/11/21 04:14:39 INFO ResourceUtils: Adding resource type - name = vcores, units = , type = COUNTABLE
+20/11/21 04:14:39 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (12288 MB per container)
+20/11/21 04:14:39 INFO Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+20/11/21 04:14:39 INFO Client: Setting up container launch context for our AM
+20/11/21 04:14:39 INFO Client: Setting up the launch environment for our AM container
+20/11/21 04:14:39 INFO Client: Preparing resources for our AM container
+20/11/21 04:14:39 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+20/11/21 04:14:41 INFO Client: Uploading resource file:/mnt/tmp/spark-17075bd2-1820-44cc-8de2-78f1c545ca5b/__spark_libs__4997594532390055604.zip -> hdfs://ip-172-31-11-81.ec2.internal:8020/user/hadoop/.sparkStaging/application_1605928092208_0008/__spark_libs__4997594532390055604.zip
+20/11/21 04:14:42 INFO Client: Uploading resource file:/etc/spark/conf/hive-site.xml -> hdfs://ip-172-31-11-81.ec2.internal:8020/user/hadoop/.sparkStaging/application_1605928092208_0008/hive-site.xml
+20/11/21 04:14:42 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/pyspark.zip -> hdfs://ip-172-31-11-81.ec2.internal:8020/user/hadoop/.sparkStaging/application_1605928092208_0008/pyspark.zip
+20/11/21 04:14:42 INFO Client: Uploading resource file:/usr/lib/spark/python/lib/py4j-0.10.7-src.zip -> hdfs://ip-172-31-11-81.ec2.internal:8020/user/hadoop/.sparkStaging/application_1605928092208_0008/py4j-0.10.7-src.zip
+20/11/21 04:14:42 INFO Client: Uploading resource file:/mnt/tmp/spark-17075bd2-1820-44cc-8de2-78f1c545ca5b/__spark_conf__364395694059186603.zip -> hdfs://ip-172-31-11-81.ec2.internal:8020/user/hadoop/.sparkStaging/application_1605928092208_0008/__spark_conf__.zip
+20/11/21 04:14:42 INFO SecurityManager: Changing view acls to: hadoop
+20/11/21 04:14:42 INFO SecurityManager: Changing modify acls to: hadoop
+20/11/21 04:14:42 INFO SecurityManager: Changing view acls groups to: 
+20/11/21 04:14:42 INFO SecurityManager: Changing modify acls groups to: 
+20/11/21 04:14:42 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(hadoop); groups with view permissions: Set(); users  with modify permissions: Set(hadoop); groups with modify permissions: Set()
+20/11/21 04:14:43 INFO Client: Submitting application application_1605928092208_0008 to ResourceManager
+20/11/21 04:14:43 INFO YarnClientImpl: Submitted application application_1605928092208_0008
+20/11/21 04:14:43 INFO SchedulerExtensionServices: Starting Yarn extension services with app application_1605928092208_0008 and attemptId None
+20/11/21 04:14:44 INFO Client: Application report for application_1605928092208_0008 (state: ACCEPTED)
+20/11/21 04:14:44 INFO Client: 
+	 client token: N/A
+	 diagnostics: AM container is launched, waiting for AM container to Register with RM
+	 ApplicationMaster host: N/A
+	 ApplicationMaster RPC port: -1
+	 queue: default
+	 start time: 1605932083797
+	 final status: UNDEFINED
+	 tracking URL: http://ip-172-31-11-81.ec2.internal:20888/proxy/application_1605928092208_0008/
+	 user: hadoop
+20/11/21 04:14:45 INFO Client: Application report for application_1605928092208_0008 (state: ACCEPTED)
+20/11/21 04:14:46 INFO Client: Application report for application_1605928092208_0008 (state: ACCEPTED)
+20/11/21 04:14:47 INFO YarnClientSchedulerBackend: Add WebUI Filter. org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter, Map(PROXY_HOSTS -> ip-172-31-11-81.ec2.internal, PROXY_URI_BASES -> http://ip-172-31-11-81.ec2.internal:20888/proxy/application_1605928092208_0008), /proxy/application_1605928092208_0008
+20/11/21 04:14:47 INFO Client: Application report for application_1605928092208_0008 (state: RUNNING)
+20/11/21 04:14:47 INFO Client: 
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: 172.31.0.169
+	 ApplicationMaster RPC port: -1
+	 queue: default
+	 start time: 1605932083797
+	 final status: UNDEFINED
+	 tracking URL: http://ip-172-31-11-81.ec2.internal:20888/proxy/application_1605928092208_0008/
+	 user: hadoop
+20/11/21 04:14:47 INFO YarnClientSchedulerBackend: Application application_1605928092208_0008 has started running.
+20/11/21 04:14:47 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 42081.
+20/11/21 04:14:47 INFO NettyBlockTransferService: Server created on ip-172-31-11-81.ec2.internal:42081
+20/11/21 04:14:47 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+20/11/21 04:14:47 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, ip-172-31-11-81.ec2.internal, 42081, None)
+20/11/21 04:14:47 INFO BlockManagerMasterEndpoint: Registering block manager ip-172-31-11-81.ec2.internal:42081 with 1028.8 MB RAM, BlockManagerId(driver, ip-172-31-11-81.ec2.internal, 42081, None)
+20/11/21 04:14:47 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, ip-172-31-11-81.ec2.internal, 42081, None)
+20/11/21 04:14:47 INFO BlockManager: external shuffle service port = 7337
+20/11/21 04:14:47 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, ip-172-31-11-81.ec2.internal, 42081, None)
+20/11/21 04:14:47 INFO YarnSchedulerBackend$YarnSchedulerEndpoint: ApplicationMaster registered as NettyRpcEndpointRef(spark-client://YarnAM)
+20/11/21 04:14:48 INFO JettyUtils: Adding filter org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter to /metrics/json.
+20/11/21 04:14:48 INFO EventLoggingListener: Logging events to hdfs:/var/log/spark/apps/application_1605928092208_0008
+20/11/21 04:14:48 INFO Utils: Using initial executors = 1, max of spark.dynamicAllocation.initialExecutors, spark.dynamicAllocation.minExecutors and spark.executor.instances
+20/11/21 04:14:48 INFO YarnClientSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+20/11/21 04:14:48 INFO SharedState: loading hive config file: file:/etc/spark/conf.dist/hive-site.xml
+20/11/21 04:14:48 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('hdfs:///user/spark/warehouse').
+20/11/21 04:14:48 INFO SharedState: Warehouse path is 'hdfs:///user/spark/warehouse'.
+20/11/21 04:14:48 INFO JettyUtils: Adding filter org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter to /SQL.
+20/11/21 04:14:48 INFO JettyUtils: Adding filter org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter to /SQL/json.
+20/11/21 04:14:48 INFO JettyUtils: Adding filter org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter to /SQL/execution.
+20/11/21 04:14:48 INFO JettyUtils: Adding filter org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter to /SQL/execution/json.
+20/11/21 04:14:48 INFO JettyUtils: Adding filter org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter to /static/sql.
+20/11/21 04:14:49 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+[('spark.eventLog.enabled', 'true'), ('spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem', '2'), ('spark.driver.cores', '4'), ('spark.sql.shuffle.partitions', '4'), ('spark.driver.appUIAddress', 'http://ip-172-31-11-81.ec2.internal:4040'), ('spark.driver.extraLibraryPath', '/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native'), ('spark.default.parallelism', '8'), ('spark.sql.parquet.output.committer.class', 'com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter'), ('spark.blacklist.decommissioning.timeout', '1h'), ('spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS', '$(hostname -f)'), ('spark.executor.cores', '4'), ('spark.sql.emr.internal.extensions', 'com.amazonaws.emr.spark.EmrSparkSessionExtensions'), ('spark.executorEnv.PYTHONPATH', '{{PWD}}/pyspark.zip<CPS>{{PWD}}/py4j-0.10.7-src.zip'), ('spark.eventLog.dir', 'hdfs:///var/log/spark/apps'), ('spark.executor.defaultJavaOptions', "-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p' -XX:+UseParallelGC -XX:InitiatingHeapOccupancyPercent=70"), ('spark.sql.hive.metastore.sharedPrefixes', 'com.amazonaws.services.dynamodbv2'), ('spark.sql.warehouse.dir', 'hdfs:///user/spark/warehouse'), ('spark.serializer.objectStreamReset', '100'), ('spark.org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter.param.PROXY_HOSTS', 'ip-172-31-11-81.ec2.internal'), ('spark.submit.deployMode', 'client'), ('spark.history.fs.logDirectory', 'hdfs:///var/log/spark/apps'), ('spark.ui.filters', 'org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter'), ('spark.org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter.param.PROXY_URI_BASES', 'http://ip-172-31-11-81.ec2.internal:20888/proxy/application_1605928092208_0008'), ('spark.sql.parquet.fs.optimized.committer.optimization-enabled', 'true'), ('spark.app.name', 'twitter LDA'), ('spark.driver.extraClassPath', '/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/emrfs/conf:/usr/share/aws/emr/emrfs/lib/*:/usr/share/aws/emr/emrfs/auxlib/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar'), ('spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem', 'true'), ('spark.history.ui.port', '18080'), ('spark.shuffle.service.enabled', 'true'), ('spark.emr.maximizeResourceAllocation', 'true'), ('spark.executor.memory', '10g'), ('spark.hadoop.yarn.timeline-service.enabled', 'false'), ('spark.driver.memory', '10g'), ('spark.resourceManager.cleanupExpiredHost', 'true'), ('spark.executor.id', 'driver'), ('spark.yarn.historyServer.address', 'ip-172-31-11-81.ec2.internal:18080'), ('spark.executor.extraClassPath', '/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/emrfs/conf:/usr/share/aws/emr/emrfs/lib/*:/usr/share/aws/emr/emrfs/auxlib/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar'), ('spark.yarn.dist.files', 'file:/etc/spark/conf/hive-site.xml'), ('spark.files.fetchFailure.unRegisterOutputOnHost', 'true'), ('spark.driver.port', '42723'), ('spark.driver.defaultJavaOptions', "-XX:OnOutOfMemoryError='kill -9 %p' -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=70 -XX:MaxHeapFreeRatio=70 -XX:+CMSClassUnloadingEnabled"), ('spark.master', 'yarn'), ('spark.decommissioning.timeout.threshold', '20'), ('spark.stage.attempt.ignoreOnDecommissionFetchFailure', 'true'), ('spark.rdd.compress', 'True'), ('spark.driver.host', 'ip-172-31-11-81.ec2.internal'), ('spark.executor.extraLibraryPath', '/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native'), ('spark.executor.instances', '1'), ('spark.yarn.isPython', 'true'), ('spark.dynamicAllocation.enabled', 'true'), ('spark.ui.proxyBase', '/proxy/application_1605928092208_0008'), ('spark.app.id', 'application_1605928092208_0008'), ('spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds', '2000'), ('spark.blacklist.decommissioning.enabled', 'true')]
+model will be save in 
+ s3://bigdata-chuangxin-week2/twitter-data-collection/ML_models/LDA-pipeline-model_Nov20
+Train/test data info:
+==================================================
+Load training data from: 
+twitter-data-collection/parquet/Oct_data_processed
+Load test data from: 
+twitter-data-collection/parquet/Nov_1_2_processed
+nums of training data:    1362742
+nums of test data:      78683
+==================================================
+training LDA with n topics:  5
+20/11/21 04:21:23 WARN TaskSetManager: Stage 780 contains a task of very large size (1007 KB). The maximum recommended task size is 100 KB.
+20/11/21 04:21:25 WARN TaskSetManager: Stage 784 contains a task of very large size (467 KB). The maximum recommended task size is 100 KB.
++---------------------------------------------------------------------------------+
+|Terms                                                                            |
++---------------------------------------------------------------------------------+
+|[data, like, work, world, join, take, free, solut, get, futur]                   |
+|[technolog, time, creat, advanc, data, user, leverag, approach, revolution, mine]|
+|[data, predict, report, join, see, work, scienc, futur, help, python]            |
+|[data, busi, help, get, model, make, latest, python, human, develop]             |
+|[data, code, develop, vs, get, help, scienc, python, free, latest]               |
++---------------------------------------------------------------------------------+
+
+Model performance on training data:
+Log Likelihood: -496124061.3952
+Model performance on test data:
+Skip the calculation of log Likelihood on test set to save time
+calculating log perplexity...
+Log Perplexity:  10.1420
+training LDA with n topics:  8
+20/11/21 04:34:54 WARN TaskSetManager: Stage 1833 contains a task of very large size (1007 KB). The maximum recommended task size is 100 KB.
+20/11/21 04:34:55 WARN TaskSetManager: Stage 1837 contains a task of very large size (467 KB). The maximum recommended task size is 100 KB.
++---------------------------------------------------------------------------------+
+|Terms                                                                            |
++---------------------------------------------------------------------------------+
+|[data, scienc, latest, busi, help, free, human, us, develop, make]               |
+|[data, like, world, take, share, python, free, robot, get, win]                  |
+|[report, data, leader, fear, join, love, voic, languag, defeat, arria]           |
+|[technolog, user, advanc, creat, time, approach, leverag, revolution, mine, earn]|
+|[data, industri, help, human, get, make, busi, predict, see, python]             |
+|[data, digit, work, avail, alreadi, past, month, copi, ar, thread]               |
+|[data, best, medic, develop, talk, python, free, vs, great, help]                |
+|[data, predict, help, develop, model, busi, futur, get, latest, market]          |
++---------------------------------------------------------------------------------+
+
+Model performance on training data:
+Log Likelihood: -491739001.8331
+Model performance on test data:
+Skip the calculation of log Likelihood on test set to save time
+calculating log perplexity...
+Log Perplexity:  13.2194
+training LDA with n topics:  10
+20/11/21 04:52:23 WARN TaskSetManager: Stage 2887 contains a task of very large size (1007 KB). The maximum recommended task size is 100 KB.
+20/11/21 04:52:24 WARN TaskSetManager: Stage 2891 contains a task of very large size (467 KB). The maximum recommended task size is 100 KB.
++--------------------------------------------------------------------------------+
+|Terms                                                                           |
++--------------------------------------------------------------------------------+
+|[data, pm, join, research, global, transform, get, develop, technolog, latest]  |
+|[report, data, leader, join, voic, defeat, love, languag, arria, busi]          |
+|[data, futur, help, fear, report, make, robot, latest, python, develop]         |
+|[data, top, code, challeng, know, websit, share, latest, scienc, work]          |
+|[data, trade, risk, predict, near, visit, involv, strong, industri, iot]        |
+|[data, technolog, work, mr, latest, time, busi, help, startup, us]              |
+|[data, like, free, ibm, solut, help, human, latest, model, work]                |
+|[data, world, friend, answer, take, digit, share, shape, work, grow]            |
+|[technolog, creat, advanc, data, approach, reward, revolution, mine, user, earn]|
+|[data, revolut, industri, technolog, scienc, python, model, free, code, get]    |
++--------------------------------------------------------------------------------+
+
+Model performance on training data:
+Log Likelihood: -490124847.1465
+Model performance on test data:
+Skip the calculation of log Likelihood on test set to save time
+calculating log perplexity...
+Log Perplexity:  16.1297
