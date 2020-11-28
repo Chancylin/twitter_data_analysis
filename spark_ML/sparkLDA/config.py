@@ -47,11 +47,22 @@ file_schema = StructType([StructField("tweet_text", StringType(), True),
                           StructField("geo", StringType(), True),
                           StructField("invalid", StringType(), True)])
 
+file_schema_str = StructType([StructField("tweet_text", StringType(), True),
+                          StructField("hash_tag", StringType(), True),
+                          StructField("created_at", StringType(), True),
+                          StructField("retweet_count", StringType(), True),
+                          StructField("favorite_count", StringType(), True),
+                          StructField("retweeted", StringType(), True),
+                          StructField("truncated", StringType(), True),
+                          StructField("id", StringType(), True),
+                          StructField("user_name", StringType(), True),
+                          StructField("screen_name", StringType(), True),
+                          StructField("followers_count", StringType(), True),
+                          StructField("location", StringType(), True),
+                          StructField("geo", StringType(), True),
+                          StructField("invalid", StringType(), True)])
 
-more_stopwords = ["also", "via", "cc", "rt", "must", "always", 
-"learn", "ai", "data", "machin", "use", "intellig", "new", "artifici", "technolog", 
-'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
+cols_select = ['tweet_text', 'hash_tag', 'created_at', 'retweet_count', 'favorite_count']
 # [|[learn, use, machin, data, ai, shape, friend, answer, intellig, part]             |
 # |[technolog, advanc, time, creat, leverag, user, approach, revolution, mine, learn]|
 # |[learn, ai, data, use, machin, intellig, predict, join, artifici, new]            |

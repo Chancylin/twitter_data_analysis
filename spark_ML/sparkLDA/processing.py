@@ -4,11 +4,9 @@ from pyspark.ml.feature import Tokenizer, StopWordsRemover
 
 # Import stemmer library
 from nltk.stem.porter import PorterStemmer
-from .config import stopwords_list
+from .config import stopwords_list, cols_select
 
 def preprocess_text(df):
-    
-    cols_select = ['tweet_text', 'hash_tag', 'created_at', 'retweet_count', 'favorite_count']
 
     df_select = df.dropna(subset=["tweet_text"]).select(cols_select)
     # 1. clean text
