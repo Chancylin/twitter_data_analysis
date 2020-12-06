@@ -31,7 +31,7 @@ extra_for_stemmed = ["learn", "ai", "machin", "use", "intellig", "new", "artific
                      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                      'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-file_schema = StructType([StructField("tweet_text", StringType(), True), 
+file_schema = StructType([StructField("raw_tweet_text", StringType(), True),
                           # StructField("hash_tag", ArrayType(StringType(), True), True), 
                           StructField("hash_tag", StringType(), True), 
                           StructField("created_at", StringType(), True), 
@@ -47,7 +47,7 @@ file_schema = StructType([StructField("tweet_text", StringType(), True),
                           StructField("geo", StringType(), True),
                           StructField("invalid", StringType(), True)])
 
-file_schema_str = StructType([StructField("tweet_text", StringType(), True),
+file_schema_str = StructType([StructField("raw_tweet_text", StringType(), True),
                           StructField("hash_tag", StringType(), True),
                           StructField("created_at", StringType(), True),
                           StructField("retweet_count", StringType(), True),
@@ -62,7 +62,7 @@ file_schema_str = StructType([StructField("tweet_text", StringType(), True),
                           StructField("geo", StringType(), True),
                           StructField("invalid", StringType(), True)])
 
-cols_select = ['tweet_text', 'hash_tag', 'created_at', 'retweet_count', 'favorite_count']
+cols_select = ['raw_tweet_text', 'hash_tag', 'created_at', 'retweet_count', 'favorite_count']
 # [|[learn, use, machin, data, ai, shape, friend, answer, intellig, part]             |
 # |[technolog, advanc, time, creat, leverag, user, approach, revolution, mine, learn]|
 # |[learn, ai, data, use, machin, intellig, predict, join, artifici, new]            |

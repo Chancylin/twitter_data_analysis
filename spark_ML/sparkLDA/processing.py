@@ -8,9 +8,9 @@ from .config import stopwords_list, cols_select
 
 def preprocess_text(df):
 
-    df_select = df.dropna(subset=["tweet_text"]).select(cols_select)
+    df_select = df.dropna(subset=["raw_tweet_text"]).select(cols_select)
     # 1. clean text
-    df_select_clean = (df_select.withColumn("tweet_text", F.regexp_replace("tweet_text", r"[@#&][A-Za-z0-9_-]+", " "))
+    df_select_clean = (df_select.withColumn("tweet_text", F.regexp_replace("raw_tweet_text", r"[@#&][A-Za-z0-9_-]+", " "))
                        .withColumn("tweet_text", F.regexp_replace("tweet_text", r"\w+:\/\/\S+", " "))
                        .withColumn("tweet_text", F.regexp_replace("tweet_text", r"[^A-Za-z]", " "))
                        .withColumn("tweet_text", F.regexp_replace("tweet_text", r"\s+", " "))

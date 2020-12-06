@@ -1,0 +1,78 @@
+
+Specified ALL for -am option. Printed logs for all am containers.
+Container: container_1607030473851_0006_01_000001 on ip-172-31-14-152.ec2.internal_8041
+LogAggregationType: AGGREGATED
+=======================================================================================
+LogType:stdout
+LogLastModifiedTime:Fri Dec 04 01:16:27 +0000 2020
+LogLength:9690
+LogContents:
+[('spark.eventLog.enabled', 'true'), ('spark.hadoop.mapreduce.fileoutputcommitter.algorithm.version.emr_internal_use_only.EmrFileSystem', '2'), ('spark.sql.shuffle.partitions', '4'), ('spark.submit.deployMode', 'cluster'), ('spark.sql.parquet.output.committer.class', 'com.amazon.emr.committer.EmrOptimizedSparkSqlParquetOutputCommitter'), ('spark.driver.extraClassPath', '/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/emrfs/conf:/usr/share/aws/emr/emrfs/lib/*:/usr/share/aws/emr/emrfs/auxlib/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/emrfs/conf:/docker/usr/share/aws/emr/emrfs/lib/*:/docker/usr/share/aws/emr/emrfs/auxlib/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar'), ('spark.blacklist.decommissioning.timeout', '1h'), ('spark.yarn.appMasterEnv.SPARK_PUBLIC_DNS', '$(hostname -f)'), ('spark.yarn.app.id', 'application_1607030473851_0006'), ('spark.sql.emr.internal.extensions', 'com.amazonaws.emr.spark.EmrSparkSessionExtensions'), ('spark.executor.extraClassPath', '/usr/lib/hadoop-lzo/lib/*:/usr/lib/hadoop/hadoop-aws.jar:/usr/share/aws/aws-java-sdk/*:/usr/share/aws/emr/emrfs/conf:/usr/share/aws/emr/emrfs/lib/*:/usr/share/aws/emr/emrfs/auxlib/*:/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/usr/share/aws/emr/security/conf:/usr/share/aws/emr/security/lib/*:/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar:/docker/usr/lib/hadoop-lzo/lib/*:/docker/usr/lib/hadoop/hadoop-aws.jar:/docker/usr/share/aws/aws-java-sdk/*:/docker/usr/share/aws/emr/emrfs/conf:/docker/usr/share/aws/emr/emrfs/lib/*:/docker/usr/share/aws/emr/emrfs/auxlib/*:/docker/usr/share/aws/emr/goodies/lib/emr-spark-goodies.jar:/docker/usr/share/aws/emr/security/conf:/docker/usr/share/aws/emr/security/lib/*:/docker/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client.jar:/docker/usr/share/java/Hive-JSON-Serde/hive-openx-serde.jar:/docker/usr/share/aws/sagemaker-spark-sdk/lib/sagemaker-spark-sdk.jar:/docker/usr/share/aws/emr/s3select/lib/emr-s3-select-spark-connector.jar'), ('spark.eventLog.dir', 'hdfs:///var/log/spark/apps'), ('spark.app.id', 'application_1607030473851_0006'), ('spark.executor.defaultJavaOptions', "-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:OnOutOfMemoryError='kill -9 %p' -XX:+UseParallelGC -XX:InitiatingHeapOccupancyPercent=70"), ('spark.sql.hive.metastore.sharedPrefixes', 'com.amazonaws.services.dynamodbv2'), ('spark.sql.warehouse.dir', 'hdfs:///user/spark/warehouse'), ('spark.serializer.objectStreamReset', '100'), ('spark.history.fs.logDirectory', 'hdfs:///var/log/spark/apps'), ('spark.ui.filters', 'org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter'), ('spark.yarn.app.container.log.dir', '/var/log/hadoop-yarn/containers/application_1607030473851_0006/container_1607030473851_0006_01_000001'), ('spark.sql.parquet.fs.optimized.committer.optimization-enabled', 'true'), ('spark.app.name', 'twitter LDA'), ('spark.driver.extraLibraryPath', '/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native'), ('spark.hadoop.mapreduce.fileoutputcommitter.cleanup-failures.ignored.emr_internal_use_only.EmrFileSystem', 'true'), ('spark.executor.extraLibraryPath', '/usr/lib/hadoop/lib/native:/usr/lib/hadoop-lzo/lib/native:/docker/usr/lib/hadoop/lib/native:/docker/usr/lib/hadoop-lzo/lib/native'), ('spark.org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter.param.PROXY_HOSTS', 'ip-172-31-14-193.ec2.internal'), ('spark.history.ui.port', '18080'), ('spark.org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter.param.PROXY_URI_BASES', 'http://ip-172-31-14-193.ec2.internal:20888/proxy/application_1607030473851_0006'), ('spark.yarn.historyServer.address', 'ip-172-31-14-193.ec2.internal:18080'), ('spark.shuffle.service.enabled', 'true'), ('spark.emr.maximizeResourceAllocation', 'true'), ('spark.driver.cores', '2'), ('spark.hadoop.yarn.timeline-service.enabled', 'false'), ('spark.executor.memory', '10g'), ('spark.driver.memory', '10g'), ('spark.resourceManager.cleanupExpiredHost', 'true'), ('spark.driver.host', 'ip-172-31-14-152.ec2.internal'), ('spark.executor.id', 'driver'), ('spark.yarn.dist.files', 'file:/etc/spark/conf/hive-site.xml'), ('spark.executorEnv.PYTHONPATH', '{{PWD}}/pyspark.zip<CPS>{{PWD}}/py4j-0.10.9-src.zip'), ('spark.executor.cores', '2'), ('spark.driver.port', '36235'), ('spark.files.fetchFailure.unRegisterOutputOnHost', 'true'), ('spark.driver.defaultJavaOptions', "-XX:OnOutOfMemoryError='kill -9 %p' -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=70 -XX:MaxHeapFreeRatio=70 -XX:+CMSClassUnloadingEnabled"), ('spark.master', 'yarn'), ('spark.ui.port', '0'), ('spark.decommissioning.timeout.threshold', '20'), ('spark.default.parallelism', '16'), ('spark.stage.attempt.ignoreOnDecommissionFetchFailure', 'true'), ('spark.rdd.compress', 'True'), ('spark.executor.instances', '1'), ('spark.submit.pyFiles', ''), ('spark.dynamicAllocation.enabled', 'true'), ('spark.yarn.isPython', 'true'), ('spark.hadoop.fs.s3.getObject.initialSocketTimeoutMilliseconds', '2000'), ('spark.blacklist.decommissioning.enabled', 'true')]
+==================================================
+Load training data from: 
+twitter-data-collection/parquet/Nov_data_processed
+Load test data from: 
+twitter-data-collection/parquet/Dec_1_2_processed
+model will be save in 
+ s3://bigdata-chuangxin-week2/twitter-data-collection/ML_models/LDA-pipeline-model_Nov_Data/
+==================================================
+Train/test data info:
+==================================================
+nums of training data:    1280079
+nums of test data:      97918
+==================================================
+training LDA with n topics: 5, and maxIter: 20
++----------------------------------------------------------------------------+
+|Terms                                                                       |
++----------------------------------------------------------------------------+
+|[data, predict, model, python, see, help, scienc, need, work, get]          |
+|[data, scienc, help, technolog, top, futur, latest, buy, free, busi]        |
+|[data, vrx, presal, join, scienc, free, python, eth, latest, start]         |
+|[data, scienc, develop, busi, technolog, help, python, human, make, process]|
+|[data, ctrl, work, market, help, time, latest, technolog, us, scienc]       |
++----------------------------------------------------------------------------+
+
+Model performance on training data:
+Log Likelihood: -460942721.8337
+Model performance on test data:
+Skip the calculation of log Likelihood on test set to save time
+calculating log perplexity...
+Log Perplexity:  9.6368
+training LDA with n topics: 5, and maxIter: 40
++--------------------------------------------------------------------------------+
+|Terms                                                                           |
++--------------------------------------------------------------------------------+
+|[model, see, predict, base, network, creat, need, detect, neural, googl]        |
+|[futur, look, regist, technolog, expert, app, digit, share, virtual, thing]     |
+|[data, scienc, python, free, cours, start, book, join, ml, deep]                |
+|[develop, think, human, impact, tech, health, process, becom, problem, challeng]|
+|[work, help, time, market, latest, watch, build, daili, robot, platform]        |
++--------------------------------------------------------------------------------+
+
+Model performance on training data:
+Log Likelihood: -450945650.8773
+Model performance on test data:
+Skip the calculation of log Likelihood on test set to save time
+calculating log perplexity...
+Log Perplexity:  9.5763
+training LDA with n topics: 5, and maxIter: 60
++---------------------------------------------------------------------------+
+|Terms                                                                      |
++---------------------------------------------------------------------------+
+|[model, see, predict, base, creat, network, detect, algorithm, way, need]  |
+|[futur, look, us, today, join, technolog, digit, regist, next, share]      |
+|[data, scienc, python, free, cours, top, best, project, start, code]       |
+|[human, develop, tech, becom, challeng, think, know, import, impact, chang]|
+|[latest, help, work, time, thank, robot, daili, market, busi, build]       |
++---------------------------------------------------------------------------+
+
+Model performance on training data:
+Log Likelihood: -449243417.4042
+Model performance on test data:
+Skip the calculation of log Likelihood on test set to save time
+calculating log perplexity...
+Log Perplexity:  9.5640
+
+End of LogType:stdout
+***********************************************************************
+
